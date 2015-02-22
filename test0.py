@@ -8,7 +8,7 @@ import time
 import Adafruit_BMP.BMP085 as BMP085
 from m2x.client import M2XClient
 
-sample_rate = 60.0 # in seconds as float
+sample_rate = 300.0 # in seconds as float
 s_bmp085 = BMP085.BMP085()
 s_bmp085 = BMP085.BMP085(busnum=1)
 m2xclient = M2XClient(key=APIKEY)
@@ -28,7 +28,7 @@ for i in range(0,99):
 	print '{0}: Timestamp: {1}'.format(i, time.asctime(time.localtime(time.time())))
 	temp = s_bmp085.read_temperature()
 	f = ((temp * 1.8) + 32)
-	f = format(f, '.1f')
+	f = round(f, 1)
 	pressure = s_bmp085.read_pressure()
 	mb = pressure * 0.01
 	print 'Temp ({0}) written as {1}'.format(temp, f)
