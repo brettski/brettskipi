@@ -21,13 +21,14 @@ def DelayUntilNextPeriod(Period_Length):
 	return Period_Length - offset
 
 #main
+
 print 'Running. Waiting for {0} second mark.'.format(sample_rate)
-for i in range(0,9):
+for i in range(0,99):
 	time.sleep(DelayUntilNextPeriod(sample_rate))
-	print 'Timestamp: {0}'.format(time.asctime(time.localtime(time.time())))
+	print '{0}: Timestamp: {1}'.format(i, time.asctime(time.localtime(time.time())))
 	temp = s_bmp085.read_temperature()
 	f = ((temp * 1.8) + 32)
-	f = float(format(f, '.1f'))
+	f = format(f, '.1f')
 	pressure = s_bmp085.read_pressure()
 	mb = pressure * 0.01
 	print 'Temp ({0}) written as {1}'.format(temp, f)
